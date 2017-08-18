@@ -2,7 +2,7 @@
 
 Anyfetch provides abstraction layer around multiple protocols to allow accessing files in uniform way.
 
-Supported:
+Current support:
 
 * local files (via path or `file:///` protocol)
 * HTTP(s)
@@ -26,7 +26,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Simply provide file's URI. Optionally an `options` hash can be provided as second argument, it will be passed "as is" to specific handler (see below).
+
+`Anyfetch.open(uri, options)`
+
+### Local files
+
+Both path and `file://` protocol are accepted.
+
+```
+Anyfetch.open("/path/to/file")
+Anyfetch.open("file:///path/to/file")
+```
+
+### HTTP/HTTPS and FTP
+
+Internally `open-uri` (with extensions provided by `open_uri_redirections` gem) is used to fetch the file from HTTP and FTP servers. Feel free to pass any options recognized by `open-uri` or `open_uri_redirections`.
+
+```
+Anyfetch.open("http://example.org/file.html")
+Anyfetch.open("https://user:password@example.org/file.html", { 'User-Agent' => '...' })
+Anyfetch.open("ftp://user:password@example.org/file.html")
+```
+
+### Original filenames
+
+It is not always possible to know the original filename and/or content type of the accessed file upfront, e.g. when fetching files from the URLs like `http://example.org/file?id=123` or when the file is streamed from the server. Anyfetch provides `original_filename` method to the file instance to handle this. Internally it checks `content-disposition` meta information returned by the server, file's content type or simply file's basename for local files. This method can also be handy when trying to assign the file to an uploader like Paperclip or Carrierwave.
+
+```
+file = Anyfetch.open("http://example.org/file?id=123")
+file.original_filename
+# => filename.html
+```
 
 ## Development
 
