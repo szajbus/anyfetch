@@ -8,7 +8,7 @@ require "anyfetch/version"
 
 module Anyfetch extend self
   def open(uri, options = {})
-    uri = URI.parse(uri)
+    uri = URI.parse(uri.to_s)
     handler(uri, options).open
   end
 
