@@ -15,7 +15,7 @@ module Anyfetch
 
         cmd = Cocaine::CommandLine.new('/usr/bin/file', '--mime-type -b :file')
         begin
-          mime_type = cmd.run(file: path)
+          mime_type = cmd.run(:file => path)
         rescue
           mime_type = meta['content-type']
         end

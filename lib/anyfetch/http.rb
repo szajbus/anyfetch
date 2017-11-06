@@ -4,7 +4,7 @@ module Anyfetch
   class HTTP
     OPTIONS = {
       "User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0",
-      allow_redirections: :safe,
+      :allow_redirections => :safe,
     }
 
     def initialize(uri, options)
