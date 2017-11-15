@@ -8,16 +8,15 @@ require "anyfetch/version"
 
 module Anyfetch extend self
   def open(uri, options = {})
-    uri = URI.parse(uri.to_s)
+    uri = to_uri(uri)
     handler(uri, options).open
   end
 
   private
 
   def to_uri(uri)
-    uri = uri.gsub('[', '%5B').gsub(']', '%5D').strip
-    uri = ::URI.parse(::URI.encode(::URI.decode(uri)))
-    URI.parse(uri)
+    encoded = URI.encode(URI.decode(uri.to_s))
+    URI.parse(encoded)
   end
 
   def handler(uri, options = {})
