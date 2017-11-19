@@ -15,8 +15,7 @@ module Anyfetch extend self
   private
 
   def to_uri(uri)
-    encoded = URI.encode(URI.decode(uri.to_s))
-    URI.parse(encoded)
+    URI.parse(uri.to_s)
   end
 
   def handler(uri, options = {})
