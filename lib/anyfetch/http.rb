@@ -1,7 +1,7 @@
-require "anyfetch/original_filename/content_type"
+require "anyfetch/open_uri"
 
 module Anyfetch
-  class HTTP
+  class HTTP < OpenURI
     OPTIONS = {
       "User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0",
       :allow_redirections => :safe,
@@ -11,12 +11,6 @@ module Anyfetch
       @uri = uri
       @options = OPTIONS.merge(options)
       setup_basic_auth
-    end
-
-    def open
-      file = super(@uri, @options)
-      file.extend(OriginalFilename::ContentType)
-      file
     end
 
     private

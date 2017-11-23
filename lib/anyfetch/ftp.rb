@@ -1,17 +1,12 @@
+require "anyfetch/open_uri"
 require "anyfetch/original_filename/content_type"
 
 module Anyfetch
-  class FTP
+  class FTP < OpenURI
     def initialize(uri, options = {})
       @uri = uri
       @options = options
       setup_auth
-    end
-
-    def open
-      file = super(@uri)
-      file.extend(OriginalFilename::ContentType)
-      file
     end
 
     private
