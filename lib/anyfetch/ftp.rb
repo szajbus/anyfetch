@@ -12,6 +12,12 @@ module Anyfetch
     private
 
     def setup_auth
+      if @uri.user
+        # URI-encoded user must be passed to open-uri
+        # Rollback URI-encoding of user here
+        @uri.instance_variable_set "@user", URI.decode(@uri.user)
+      end
+
       if @uri.password
         # Rollback URI-encoding of password by open-uri lib
         @uri.instance_variable_set "@password", URI.decode(@uri.password)
