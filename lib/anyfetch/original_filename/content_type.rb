@@ -1,4 +1,4 @@
-require "cocaine"
+require "terrapin"
 require "mime-types"
 
 module Anyfetch
@@ -13,7 +13,7 @@ module Anyfetch
         filename = ::File.basename(base_uri.path)
         ext = ::File.extname(filename)
 
-        cmd = Cocaine::CommandLine.new('/usr/bin/file', '--mime-type -b :file')
+        cmd = Terrapin::CommandLine.new('/usr/bin/file', '--mime-type -b :file')
         begin
           mime_type = cmd.run(:file => path)
         rescue
