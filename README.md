@@ -7,6 +7,7 @@ Current support:
 * local files (via path or `file:///` protocol)
 * HTTP(s)
 * FTP
+* SFTP
 
 ## Installation
 
@@ -39,7 +40,7 @@ Anyfetch.open("/path/to/file")
 Anyfetch.open("file:///path/to/file")
 ```
 
-### HTTP/HTTPS and FTP
+### HTTP/HTTPS, FTP and SFTP
 
 Internally `open-uri` (with extensions provided by `open_uri_redirections` gem) is used to fetch the file from HTTP and FTP servers. Feel free to pass any options recognized by `open-uri` or `open_uri_redirections`.
 
@@ -47,6 +48,13 @@ Internally `open-uri` (with extensions provided by `open_uri_redirections` gem) 
 Anyfetch.open("http://example.org/file.html")
 Anyfetch.open("https://user:password@example.org/file.html", { 'User-Agent' => '...' })
 Anyfetch.open("ftp://user:password@example.org/file.html")
+```
+
+For SFTP, `net-ssh` is used under the hood, user and password can be provided as part of the URI or as options. Other methods of authentication are not supported yet.
+
+```
+Anyfetch.open("sftp://user:password@example.org/file.html")
+Anyfetch.open("sftp://example.org/file.html", user: "user", password: "password")
 ```
 
 ### Original filenames

@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terrapin'
   spec.add_dependency 'mime-types'
   spec.add_dependency 'open_uri_redirections'
+  spec.add_dependency 'net-sftp'
 
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"

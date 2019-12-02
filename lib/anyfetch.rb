@@ -4,6 +4,7 @@ require "open_uri_redirections"
 require "anyfetch/file"
 require "anyfetch/ftp"
 require "anyfetch/http"
+require "anyfetch/sftp"
 require "anyfetch/version"
 
 module Anyfetch extend self
@@ -25,6 +26,7 @@ module Anyfetch extend self
       case scheme
       when "file"    then File
       when "ftp"     then FTP
+      when "sftp"    then SFTP
       when /^https?/ then HTTP
       else
         raise "No handler for '#{scheme}' protocol."
