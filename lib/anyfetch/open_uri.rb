@@ -8,7 +8,7 @@ module Anyfetch
     end
 
     def open
-      file = super(@uri, @options)
+      file = ::OpenURI.open_uri(@uri, @options)
 
       if file.is_a?(StringIO)
         file = to_tempfile(file)
